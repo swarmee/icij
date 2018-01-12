@@ -1,0 +1,7 @@
+ {
+    "query": {
+      "query_string": {
+       "query": "n.node_id:%{message}"
+      }
+    }"_source": ["n.countries"]
+ }

@@ -1,0 +1,33 @@
+GET /edges/_search
+
+GET /edges/ 
+ 
+DELETE edges
+
+PUT /edges?pretty
+{"mappings":{"icij":{"properties":{"node_1":{"type":"long"},"node_2":{"type":"long"},"r":{"properties":{"end_date":{"type":"text","fields":{"keyword":{"type":"keyword","ignore_above":256}}},"sourceID":{"type":"text","fields":{"keyword":{"type":"keyword","ignore_above":256}}}}}}}},"settings":{"index":{"number_of_shards":"1","number_of_replicas":"0"}}}
+
+
+GET /nodes/_search
+
+GET /nodes/ 
+
+DELETE /nodes
+
+PUT /nodes-6pm?pretty
+{"mappings":{"icij":{"properties":{"n":{"properties":{"node_id":{"type":"long"}}}}}},"settings":{"index":{"number_of_shards":"1","number_of_replicas":"0"}}}
+
+
+GET /edges-flattened/_search
+  
+GET _cat/indicess 
+
+DELETE /edges-flattened
+
+
+POST /_aliases
+{
+    "actions" : [
+        { "add" : { "index" : "nodes-6pm", "alias" : "nodes" } }
+    ]
+}
