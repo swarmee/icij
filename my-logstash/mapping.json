@@ -1,0 +1,23 @@
+{
+  "template": "icij-entities",
+  "settings": {
+    "number_of_shards": 1,
+    "number_of_replicas": 0,
+    "index.codec": "best_compression",
+    "index.refresh_interval" : "5s"
+  },
+    "mappings": {
+      "_doc": {
+        "properties": {
+          "node_2": {
+            "type": "long"
+          },
+            "node_1": {
+            "type": "long"
+          }
+        }
+      }
+    }
+  }
+
+

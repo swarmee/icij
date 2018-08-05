@@ -1,0 +1,118 @@
+{
+  "template": "products-v2",
+  "_meta": {
+    "name": "basic products template mapping"
+  },
+  "order": 1,
+  "version": 1,
+  "index_patterns": [
+    "products-v*"
+  ],
+  "aliases": {},
+  "settings": {
+    "number_of_shards": 1,
+    "number_of_replicas": 0,
+    "analysis": {
+      "analyzer": {
+        "edge_ngram_number_analyser": {
+          "tokenizer": "edge_ngram_number_tokenizer"
+        },
+        "simple_number_analyser": {
+          "tokenizer": "simple_number_tokenizer"
+        },
+        "simple_word_analyser": {
+          "tokenizer": "simple_word_tokenizer",
+          "filter": [
+            "english_stop",
+            "standard",
+            "lowercase"
+          ]
+        },
+        "snowball_analyser": {
+          "type": "snowball",
+          "language": "English"
+        }
+      },
+      "tokenizer": {
+        "edge_ngram_number_tokenizer": {
+          "type": "edge_ngram",
+          "min_gram": 2,
+          "max_gram": 6,
+          "token_chars": [
+            "digit"
+          ]
+        },
+        "simple_number_tokenizer": {
+          "type": "simple_pattern",
+          "pattern": "[0-9]{2,5}"
+        },
+        "simple_word_tokenizer": {
+          "type": "simple_pattern",
+          "pattern": "[a-zA-Z]{3,20}"
+        }
+      },
+      "filter": {
+        "english_stop": {
+          "type": "stop",
+          "stopwords": "_english_"
+        }
+      }
+    }
+  },
+  "mappings": {
+    "_doc": {
+      "properties": {
+        "title": {
+          "type": "text",
+          "analyzer": "standard",
+          "fields": {
+            "edgeNgramsNumber": {
+              "type": "text",
+              "analyzer": "edge_ngram_number_analyser"
+            },
+            "simpleNumber": {
+              "type": "text",
+              "analyzer": "simple_number_analyser"
+            },
+            "simpleWord": {
+              "type": "text",
+              "analyzer": "simple_word_analyser"
+            },
+            "snowball": {
+              "type": "text",
+              "analyzer": "snowball_analyser"
+            }
+          }
+        },
+        "description": {
+          "type": "text",
+          "analyzer": "standard",
+          "fields": {
+            "simpleWord": {
+              "type": "text",
+              "analyzer": "simple_word_analyser"
+            },
+            "snowball": {
+              "type": "text",
+              "analyzer": "snowball_analyser"
+            }
+          }
+        },
+        "brand": {
+          "type": "text",
+          "analyzer": "standard",
+          "fields": {
+            "simpleWord": {
+              "type": "text",
+              "analyzer": "simple_word_analyser"
+            },
+            "snowball": {
+              "type": "text",
+              "analyzer": "snowball_analyser"
+            }
+          }
+        }
+      }
+    }
+  }
+}

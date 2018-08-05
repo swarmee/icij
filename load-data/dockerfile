@@ -1,0 +1,26 @@
+FROM alpine:3.6
+
+# install wget and unzip
+RUN apk update && apk add bash curl && rm -rf /var/cache/apk/*
+
+# create data directory
+RUN mkdir -p /tmp/sample/
+
+# Move the pipeline into the container
+COPY ./parse-products-pipeline.json /tmp/sample/parse-products-pipeline.json
+
+# Move the Index Template into the container
+#COPY ./products-index-template.json /tmp/sample/products-index-template.json
+
+# Move the data into the container
+#COPY ./competitor-products.csv /tmp/sample/competitor-products.csv
+
+# Move the script into the container
+COPY ./load-data.sh /tmp/sample/load-data.sh
+
+# give everybody access
+RUN chmod -R 777 /tmp/sample/*
+
+# use this to keep a temporary container alive for trouble shooting
+#ENTRYPOINT ["tail", "-f", "/dev/null"]
+#ENTRYPOINT ["/usr/bin/curl"]

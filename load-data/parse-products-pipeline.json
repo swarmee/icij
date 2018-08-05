@@ -1,0 +1,20 @@
+{
+ "description": "Parsing data",
+ "processors": [
+   {
+     "grok": {
+       "field": "input",
+       "patterns": [
+         "%{NUMBER:pricefy_id},%{NUMBER:website_id},%{DATA:website_job_id},%{NUMBER:catalog_job_id},%{DATA:url},%{DATA:title},%{DATA:sku},%{DATA:product_id},%{DATA:mpn},%{DATA:gtin},%{DATA:model},%{DATA:description},%{DATA:brand},%{NUMBER:price}"
+       ]
+     }
+   },
+   {
+     "remove": {
+       "field": "input"
+     }
+   }
+ ]
+}
+
+
